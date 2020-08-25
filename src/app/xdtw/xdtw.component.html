@@ -1,0 +1,113 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header" *ngFor="let c of subject">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-border-width" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M0 3.5A.5.5 0 0 1 .5 3h15a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-2zm0 5A.5.5 0 0 1 .5 8h15a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1zm0 4a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z" />
+                </svg>
+
+                {{c.Name}}
+                <span class="btn btn-success btntime p-1 float-right">{{h}}:{{m}}:{{s}}</span>
+            </div>
+            <div class="card-body">
+                <!-- *ngFor="let q of quiz | paginate: { itemsPerPage: slcauhoi, currentPage: tranght }" -->
+                <p>{{index+ 1}}. {{quizct.Text}}</p>
+                <div class="dropdown-divider"></div>
+
+                <div class="form-check" *ngFor="let dapan of quizct.Answers">
+                    <input class="form-check-input" type="radio" name="luachon" id="exampleRadios1" value="{{dapan.Id}}" [(ngModel)]="luachon" checked="">
+                    <label class="form-check-label" for="{{exampleRadios1}}">                 
+                        {{dapan.Text}}
+                    </label>
+                </div>
+
+                <!-- <div class="m-1" *ngFor="let dapan of quizct.Answers">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" [(ngModel)]="luachon" name="luachon" id="{{dapan.Id}}"  value="{{dapan.Text}}" checked="">{{dapan.Text}} .{{dapan.Id}}
+                        </label>
+                        <span></span>
+                    </div>
+                </div> -->
+
+            </div>
+            <div class="card-footer">
+                MARKS: {{index}}/80
+            </div>
+        </div>
+        <!--end card-->
+        <div class="text-center mt-2 ">
+            <button type="button" class="btn btn-dark" (click)='Sau()'>
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-left" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                    <path fill-rule="evenodd"
+                        d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                </svg>
+            </button>
+            <button type="button" class="btn btn-dark m-2" (click)='Next()'>
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-right" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                    <path fill-rule="evenodd"
+                        d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+            </button>
+            <!-- <pagination-controls (pageChange)="tranght = $event"></pagination-controls> -->
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Nộp Bài
+            </button>
+        </div>
+
+        <!-- Button trigger modal -->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Kết quả</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th class="col">Câu hỏi</th>
+                                    <th class="col">Câu trả lời</th>
+                                    <th class="col">Đán áp</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let t of mang">
+                                    <td scope="row">{{t.cauhoi}}</td>
+                                    <td>{{t.dapan}}</td>
+                                    <td>
+                                        <ng-container *ngIf="t.ketqua; else elseTemplate">
+                                            Đúng
+                                        </ng-container>
+                                        <ng-template #elseTemplate>
+                                            Sai
+                                        </ng-template>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary">Lưu kết quả</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="bg-light p-3">
+    <div class="row">
+        <div class="col-sm-6">
+            <h5>Sắp xếp thứ tự:</h5>
+        </div>
+        <div class="col-sm-6">
+            <button class="btn btn-secondary" (click)="sort('Name')" >
+                
+
+                Theo Tên
+                <span [hidden]="reverse">▼</span>
+                <span [hidden]="!reverse">▲</span>
+            </button>
+            <button class="btn btn-success ml-3" (click)="sort('Id')">Theo Mã Môn Học
+                <span [hidden]="reverse">▼</span>
+                <span [hidden]="!reverse">▲</span>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6 p-3"
+        *ngFor="let mon of subjects | paginate: { itemsPerPage: slmon, currentPage: tranght } | orderBy: key : reverse">
+        <div class="card">
+            <div class="card-body m-auto">
+                <img src="assets/img/logos/{{mon.Logo}}" alt="">
+            </div>
+            <div class="card-footer text-center">
+                <a href="/xdtw/{{mon.Id}}" class="text-dark">{{mon.Name}}</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="m-auto">
+        <pagination-controls (pageChange)="tranght = $event"></pagination-controls>
+    </div>
+</div>
