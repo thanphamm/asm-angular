@@ -17,7 +17,7 @@ export class DangnhapComponent implements OnInit {
   }
 
   login() : void {
-    if(this.username == 'vinhthanh' && this.password == '123'){
+    if(this.username == 'admin' && this.password == 'admin'){
      this.router.navigate(["main"]);
     }else {
       alert("Đăng nhập thất bại");
