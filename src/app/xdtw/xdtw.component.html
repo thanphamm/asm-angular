@@ -15,7 +15,7 @@
 
                 <div class="form-check" *ngFor="let dapan of quizct.Answers">
                     <input class="form-check-input" type="radio" name="luachon" id="exampleRadios1" value="{{dapan.Id}}" [(ngModel)]="luachon" checked="">
-                    <label class="form-check-label" for="{{exampleRadios1}}">                 
+                    <label class="form-check-label" for="exampleRadios1">                 
                         {{dapan.Text}}
                     </label>
                 </div>
